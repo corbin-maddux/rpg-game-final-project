@@ -15,17 +15,14 @@ struct Weapon {
     string name;
     int damage;
 };
-
 struct Potion {
     string name;
     string effect;
 };
-
 struct Book {
     string title;
     string description;
 };
-
 struct Inventory {
     int currency = 0;
     vector<Weapon> weapons;
@@ -41,7 +38,6 @@ void equipWeapon(Inventory& inv, int index){
         inv.equippedWeapon = index;
     }
 }
-
 void usePotion(Inventory& inv, int index){
     if(index >= 0 && index < (int)inv.potions.size()){
         cout << "Used "
@@ -63,7 +59,6 @@ vector<string> buildWeaponLabels(const Inventory& inv){
             " DMG)"
         );
     }
-
     return labels;
 }
 
@@ -76,7 +71,6 @@ vector<string> buildPotionLabels(const Inventory& inv){
             potion.effect
         );
     }
-
     return labels;
 }
 
@@ -126,19 +120,14 @@ int main(){
 
     vector<string> weaponLabels =
         buildWeaponLabels(inv);
-
     vector<string> potionLabels =
         buildPotionLabels(inv);
-
     vector<string> bookLabels =
         buildBookLabels(inv);
-
     auto weaponsMenu =
         Menu(&weaponLabels, &weaponSelected);
-
     auto potionsMenu =
         Menu(&potionLabels, &potionSelected);
-
     auto booksMenu =
         Menu(&bookLabels, &bookSelected);
 
@@ -150,23 +139,18 @@ int main(){
             equipWeapon(inv, weaponSelected);
         }
     );
-
     auto usePotionButton = Button(
         "Use Potion",
         [&] {
-
             if(!inv.potions.empty())
             {
                 usePotion(inv, potionSelected);
-
                 potionLabels = buildPotionLabels(inv);
-
                 if(potionSelected >= (int)potionLabels.size())
                 {
                     potionSelected = 0;
                 }
             }
-
         }
     );
 
@@ -189,64 +173,38 @@ int main(){
     // RENDERER
 
     auto renderer = Renderer(container,[&]{
-
         return vbox({
-
             text("===================================") | bold,
-
             text("        INVENTORY") | bold,
-
             text("==================================="),
-
             separator(),
-
             text("Coins: " + to_string(inv.currency)),
-
             separator(),
-
             text("WEAPONS") | bold,
-
             weaponsMenu->Render(),
-
             separator(),
-
             inv.weapons.empty()
-
             ? text("Equipped: None")
-
             : text(
                 "Equipped: " +
                 inv.weapons[inv.equippedWeapon].name
               ),
-
             equipButton->Render(),
-
             separator(),
-
             text("POTIONS") | bold,
-
             potionsMenu->Render(),
-
             usePotionButton->Render(),
-
             separator(),
-
             text("BOOKS") | bold,
-
             booksMenu->Render(),
-
             separator(),
-
             exitButton->Render()
-
         }) | border;
 
     });
 
-    //----------------
     // START UI
 
     screen.Loop(renderer);
-
     return 0;
 }
