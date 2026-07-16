@@ -695,7 +695,7 @@ bool enemyEncounter(Player& player, Enemy enemy) {
         }
     }
 
-    // Every valid player action calls this lambda to check victory, run the
+    // Every valid player action calls this to check victory, run the
     // enemy response, check defeat, and update the active combat screen.
     auto finishTurn = [&] {
         if (isDefeated(enemy.stats)) {
@@ -906,8 +906,7 @@ void displayDefeat(Player& player, const Enemy& enemy) {
 }
 
 void displayCoinExplanation(Player& player) {
-    // This one-time screen teaches that the coin count now lives in the header,
-    // avoiding a permanent extra coin window that previously overflowed the UI.
+    // This one-time screen teaches that the coin count now lives in the header, avoiding a permanent extra coin window that previously overflowed the UI.
     auto screen = ScreenInteractive::FitComponent();
 
     auto continueButton = Button("Continue", [&] {

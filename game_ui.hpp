@@ -32,10 +32,3 @@ void displayItem(
 // Runs an encounter on a copy of Enemy so its changing HP is local to this
 // fight. It returns true only when the player wins and may continue the level.
 bool enemyEncounter(Player& player, Enemy enemy);
-
-// Displays a level entrance with a choice to continue or return to the menu.
-bool levelEntrance(
-    Player& player,
-    const std::string& title,
-    const std::string& description
-);

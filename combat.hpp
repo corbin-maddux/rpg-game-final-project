@@ -3,11 +3,8 @@
 // This header defines the player, enemy, weapon, and attack data that must be
 // shared between the combat calculations, level files, inventory, and UI.
 // #pragma once prevents this file from being included twice in one build unit.
-
 #include <string>
-
 #include "inventory.hpp"
-
 // Core numerical attributes shared by players and enemies.
 struct Stats {
     // maxHealth is the healing ceiling; health is the amount currently left.
@@ -64,7 +61,8 @@ struct Enemy {
     int coinDrop = 0;
     std::string extraDrop;
 
-    // Multipliers allow individual enemy types to resist or take extra damage.
+    //Calculates Damage Resistance/Damage weakness for enemies, set at one but can change
+
     double physicalDamageMultiplier = 1.0;
     double magicDamageMultiplier = 1.0;
 };
@@ -78,7 +76,7 @@ struct AttackResult {
 };
 
 // Calculates one physical player attack and directly lowers this enemy's HP.
-// References (&) are used so changes remain after the function finishes.
+// References(&)are used so changes remain after the function finishes.
 AttackResult playerAttack(Player& player, Enemy& enemy);
 
 // Magic attack. A failed attempt caused by insufficient mana should set
