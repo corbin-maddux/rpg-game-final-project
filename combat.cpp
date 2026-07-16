@@ -1,124 +1,167 @@
 #include "combat.hpp"
 
-// This implementation file contains the calculations declared in combat.hpp.
-
-#include <algorithm>
-#include <cmath>
 #include <string>
+#include <vector>
 
-namespace {
+#include "ui.hpp"
 
-// Every successful attack deals at least 1 damage, and every spell costs 10
-// mana. constexpr prevents these combat rules from changing at runtime.
-constexpr int minimumDamage = 1;
-constexpr int magicManaCost = 10;
+int enemyTurn(Player& player, Enemy& enemy) {
+    int damage = enemy.damage - player.defense;
 
-AttackResult calculateAttack(
-    int attackPower,
-    Stats& defender
-) {
-    // This local result records the damage and message that the combat screen
-    // will display after this particular physical attack.
-    AttackResult result;
-    result.turnUsed = true;
-    result.damage = std::max(
-        minimumDamage,
-        attackPower - defender.defense
-    );
-
-    defender.health = std::max(
-        0,
-        defender.health - result.damage
-    );
-
-    result.message =
-        "The attack dealt " +
-        std::to_string(result.damage) +
-        " damage!";
-
-    // Send the completed attack report back to playerAttack/enemyAttack.
-    return result;
-}
-
-} // namespace
-
-AttackResult playerAttack(Player& player, Enemy& enemy) {
-    const int baseAttackPower =
-        player.stats.damage + player.weapon.damageBonus;
-
-    const int attackPower = static_cast<int>(std::round(
-        baseAttackPower * enemy.physicalDamageMultiplier
-    ));
-
-    return calculateAttack(
-        attackPower,
-        enemy.stats
-    );
-}
-
-AttackResult playerMagicAttack(Player& player, Enemy& enemy) {
-    // Stop the spell before spending a turn when the player cannot pay 10 mana.
-    if (player.stats.mana < magicManaCost) {
-        AttackResult result;
-        result.turnUsed = false;
-        result.message = "Not enough mana!";
-        return result;
+    if (damage < 1) {
+        damage = 1;
     }
 
-    player.stats.mana -= magicManaCost;
+    player.health -= damage;
 
-    const int baseAttackPower =
-        player.stats.magicAttack + player.weapon.magicAttackBonus;
-
-    const int attackPower = static_cast<int>(std::round(
-        baseAttackPower * enemy.magicDamageMultiplier
-    ));
-
-    // Ordinary defense protects against physical attacks. Magic damage is
-    // controlled by the enemy's magic multiplier instead, so a base magic
-    // attack of 10 against a 1.5x weakness deals exactly 15 damage.
-    AttackResult result;
-    result.turnUsed = true;
-    result.damage = std::max(minimumDamage, attackPower);
-
-    enemy.stats.health = std::max(
-        0,
-        enemy.stats.health - result.damage
-    );
-
-    result.message =
-        "The magic attack dealt " +
-        std::to_string(result.damage) +
-        " damage!";
-
-    result.manaSpent = magicManaCost;
-
-    if (player.pyroBookEquipped) {
-        // The damage calculation stays magical, but the equipped book changes
-        // the feedback so the player sees that the spell became Fireball.
-        result.message =
-            "Your fireball exploded for " +
-            std::to_string(result.damage) +
-            " magic damage!";
+    if (player.health < 0) {
+        player.health = 0;
     }
 
-    return result;
+    return damage;
 }
 
-AttackResult enemyAttack(Enemy& enemy, Player& player) {
-    return calculateAttack(
-        enemy.stats.damage,
-        player.stats
+int fightEnemy(Player& player, Enemy enemy) {
+    player.inCombat = true;
+    std::string combatMessage = enemy.name + " moves toward you.";
+    int playerSpeed = player.speed + player.weaponSpeedBonus;
+
+    if (enemy.speed > playerSpeed) {
+        int damage = enemyTurn(player, enemy);
+        combatMessage = enemy.name + " is faster and attacks first for ";
+        combatMessage += std::to_string(damage) + " damage.";
+
+        showMessage(
+            "SPEED",
+            {
+                enemy.name + " has " + std::to_string(enemy.speed) + " Speed.",
+                "You have " + std::to_string(playerSpeed) + " effective Speed.",
+                "The faster fighter gets the opening attack."
+            },
+            "Continue Fight"
+        );
+
+        if (player.returnToMainMenu) {
+            player.inCombat = false;
+            return -1;
+        }
+    }
+
+    while (player.health > 0 && enemy.health > 0) {
+        std::vector<std::string> information = {
+            "Enemy: " + enemy.name,
+            "Enemy HP: " + std::to_string(enemy.health),
+            "Your HP: " + std::to_string(player.health) +
+                "/" + std::to_string(player.maxHealth),
+            "Mana: " + std::to_string(player.mana) +
+                "/" + std::to_string(player.maxMana),
+            combatMessage
+        };
+
+        std::string magicButton = "Magic Attack";
+
+        if (player.pyroBookEquipped) {
+            magicButton = "Fireball";
+        }
+
+        int choice = showMenu(
+            "ENEMY ENCOUNTER",
+            information,
+            {
+                "Melee Attack",
+                magicButton,
+                "Run Away",
+                "Return to Main Menu"
+            }
+        );
+
+        bool turnUsed = false;
+
+        if (choice == -2 || choice == 3) {
+            player.inCombat = false;
+            return -1;
+        }
+
+        if (choice == 0) {
+            int damage = player.damage + player.weaponDamageBonus;
+            damage = static_cast<int>(damage * enemy.meleeMultiplier);
+            damage -= enemy.defense;
+
+            if (damage < 1) {
+                damage = 1;
+            }
+
+            enemy.health -= damage;
+            combatMessage = "You dealt " + std::to_string(damage);
+            combatMessage += " melee damage.";
+            turnUsed = true;
+        } else if (choice == 1) {
+            if (player.mana < 10) {
+                combatMessage = "You do not have enough mana.";
+            } else {
+                player.mana -= 10;
+                int damage = static_cast<int>(
+                    player.magicDamage * enemy.magicMultiplier
+                );
+
+                if (damage < 1) {
+                    damage = 1;
+                }
+
+                enemy.health -= damage;
+
+                if (player.pyroBookEquipped) {
+                    combatMessage = "Your fireball dealt ";
+                } else {
+                    combatMessage = "Your magic dealt ";
+                }
+
+                combatMessage += std::to_string(damage) + " magic damage.";
+                turnUsed = true;
+            }
+        } else if (choice == 2) {
+            int damage = (enemy.damage * 2) - player.defense;
+
+            if (damage < 1) {
+                damage = 1;
+            }
+
+            player.health -= damage;
+            combatMessage = "Coward. You cannot escape. ";
+            combatMessage += enemy.name + " hit your back for ";
+            combatMessage += std::to_string(damage) + " damage.";
+        }
+
+        if (enemy.health <= 0) {
+            break;
+        }
+
+        if (turnUsed) {
+            int damage = enemyTurn(player, enemy);
+            combatMessage += " " + enemy.name + " dealt ";
+            combatMessage += std::to_string(damage) + " damage.";
+        }
+    }
+
+    if (player.health <= 0) {
+        player.inCombat = false;
+        showMessage(
+            "DEFEAT",
+            {"You were defeated by " + enemy.name + "."},
+            "Return to Main Menu"
+        );
+        return 0;
+    }
+
+    player.coins += enemy.coinDrop;
+    player.inCombat = false;
+    showMessage(
+        "VICTORY",
+        {
+            "You defeated " + enemy.name + "!",
+            "Coins found: " + std::to_string(enemy.coinDrop),
+            "Total coins: " + std::to_string(player.coins)
+        }
     );
-}
-
-AttackResult enemyBackAttack(Enemy& enemy, Player& player) {
-    return calculateAttack(
-        enemy.stats.damage * 2,
-        player.stats
-    );
-}
-
-bool isDefeated(const Stats& stats) {
-    return stats.health <= 0;
+    return 1;
 }

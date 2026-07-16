@@ -1,0 +1,14 @@
+# Target labels
+ ftxui-populate
+# Source files and their labels
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/CMakeFiles/ftxui-populate
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/CMakeFiles/ftxui-populate.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/CMakeFiles/ftxui-populate-complete.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/ftxui-populate-prefix/src/ftxui-populate-stamp/ftxui-populate-build.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/ftxui-populate-prefix/src/ftxui-populate-stamp/ftxui-populate-configure.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/ftxui-populate-prefix/src/ftxui-populate-stamp/ftxui-populate-download.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/ftxui-populate-prefix/src/ftxui-populate-stamp/ftxui-populate-install.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/ftxui-populate-prefix/src/ftxui-populate-stamp/ftxui-populate-mkdir.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/ftxui-populate-prefix/src/ftxui-populate-stamp/ftxui-populate-patch.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/ftxui-populate-prefix/src/ftxui-populate-stamp/ftxui-populate-test.rule
+/workspaces/rpg-game-final-project/build/_deps/ftxui-subbuild/ftxui-populate-prefix/src/ftxui-populate-stamp/ftxui-populate-update.rule

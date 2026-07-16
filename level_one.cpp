@@ -1,76 +1,103 @@
 #include "levels.hpp"
 
-#include "game_ui.hpp"
+#include "combat.hpp"
 #include "merchant.hpp"
+#include "ui.hpp"
 
-// Level 1 reuses the shared level/UI systems while introducing stronger enemies,
-// functional turn order, guard weaknesses, and the three-page stats tutorial.
+bool levelOne(Player& player) {
+    showMessage(
+        "LEVEL 1: THE HOLLOW HALLS",
+        {
+            "You enter a hallway carved from black stone.",
+            "Something moves along the ceiling above you."
+        },
+        "Continue"
+    );
 
-void levelOne(Player& player) {
-    // levelEntrance returns false when Escape is used instead of Enter Level.
-    if (!levelEntrance(
-            player,
-            "LEVEL 1: THE HOLLOW HALLS",
-            "The stairway descends into halls cut from black stone. The enemies "
-            "below have more health, stronger attacks, and better defenses.")) {
-        return;
+    if (player.returnToMainMenu) return false;
+
+    Enemy bat = {
+        "Hollow Bat", 65, 14, 7, 4, 45, 1.0, 1.0
+    };
+
+    int result = fightEnemy(player, bat);
+
+    if (result != 1) {
+        return false;
     }
 
-    displayStory(player, "WINGS IN THE DARK", {
-        "The stair ends in a vaulted hall. Scratches cover the ceiling, far above "
-        "the reach of any ordinary creature.",
-        "A leathery shape drops from the darkness and circles once before diving. "
-        "Its eyes follow the blue mark on your hand.",
-        "\"A hollow bat,\" the stranger mutters. \"Faster than the rat, tougher "
-        "too. Watch the ceiling.\""
-    }, "Face the Hollow Bat");
-    if (player.returnToMainMenu) return;
+    showMessage(
+        "COMBAT TIP: STONE GUARD",
+        {
+            "Guards are weak against melee attacks.",
+            "They take double physical damage.",
+            "Their armor resists magic, so spells deal half damage.",
+            "This guard is faster than you and attacks first."
+        },
+        "Learn About Stats"
+    );
 
-    // This local Enemy exists only during Level 1 and is copied into its fight.
-    Enemy hollowBat{
-        "Hollow Bat",
-        Stats{65, 65, 14, 7, 4, 0, 0, 0},
-        45,
-        ""
+    if (player.returnToMainMenu) return false;
+
+    showMessage(
+        "STATS GUIDE 1/3: SPEED",
+        {
+            "Speed decides who receives the opening attack.",
+            "Your weapon can increase or decrease your effective Speed.",
+            "The Iron Sword lowers your Speed by 2."
+        },
+        "Next Page"
+    );
+
+    if (player.returnToMainMenu) return false;
+
+    showMessage(
+        "STATS GUIDE 2/3: ATTACKS",
+        {
+            "Melee starts with Damage plus the equipped weapon bonus.",
+            "Enemy weakness is applied, then enemy Defense is subtracted.",
+            "Magic uses Magic Damage and the enemy's magic multiplier."
+        },
+        "Next Page"
+    );
+
+    if (player.returnToMainMenu) return false;
+
+    showMessage(
+        "STATS GUIDE 3/3: SURVIVAL",
+        {
+            "Health determines how much damage you can survive.",
+            "Mana is spent on magic attacks.",
+            "Potions restore Health or Mana from the inventory.",
+            "Choose attacks that match each enemy's weakness."
+        },
+        "Fight the Guard"
+    );
+
+    if (player.returnToMainMenu) return false;
+
+    Enemy guard = {
+        "Stone Guard", 135, 18, 16, 8, 60, 2.0, 0.5
     };
-    if (!enemyEncounter(player, hollowBat)) return;
 
-    displayStory(player, "THE STONE GUARD", {
-        "Past the hall stands a gate bound in iron. A statue before it turns its "
-        "head as you approach, shedding dust from its armored shoulders.",
-        "The stone guard tears an axe from the wall. The floor shakes beneath each "
-        "step, and old runes flare across its chest.",
-        "\"That thing was built to stop intruders,\" the stranger says. \"At the "
-        "moment, that means you.\""
-    }, "Challenge the Stone Guard");
-    if (player.returnToMainMenu) return;
+    result = fightEnemy(player, guard);
 
-    // The guard's 16 Speed is higher than the sword user's effective Speed of 8,
-    // so enemyEncounter gives the guard the opening attack.
-    Enemy stoneGuard{
-        "Stone Guard",
-        Stats{135, 135, 18, 16, 8, 0, 0, 0},
-        60,
-        ""
-    };
-    // Double melee and half magic encourage a different choice than the slime.
-    stoneGuard.physicalDamageMultiplier = 2.0;
-    stoneGuard.magicDamageMultiplier = 0.5;
+    if (result != 1) {
+        return false;
+    }
 
-    displayCombatTip(player, stoneGuard.name,
-        "Guards are weak against melee attacks and take double physical damage. "
-        "Their enchanted armor resists spells, so magic deals only half damage. "
-        "This guard is also faster than you and will attack first.");
-    if (player.returnToMainMenu) return;
-    if (!enemyEncounter(player, stoneGuard)) return;
+    showMessage(
+        "LEVEL 1 COMPLETE",
+        {
+            "The Stone Guard breaks apart.",
+            "The iron gate opens and Merrick waits beyond it."
+        },
+        "Visit Merrick"
+    );
 
-    displayStory(player, "LEVEL 1 COMPLETE", {
-        "The guard breaks apart and the iron gate groans open. Warm lantern light "
-        "spills across the cold floor from a familiar merchant stall beyond it.",
-        "The stranger's voice disappears beneath the sound of deeper machinery. "
-        "Whatever controls this place is still awake—and now it knows you are here."
-    }, "Visit the Merchant");
-    if (player.returnToMainMenu) return;
+    if (player.returnToMainMenu) return false;
 
-    merchantEncounter(player);
+    merchant(player);
+    if (player.returnToMainMenu) return false;
+    return true;
 }
