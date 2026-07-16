@@ -123,4 +123,5 @@ CMakeFiles/game.dir/level_zero.cpp.o: \
  /workspaces/rpg-game-final-project/combat.hpp \
  /workspaces/rpg-game-final-project/inventory.hpp \
  /workspaces/rpg-game-final-project/merchant.hpp \
+ /workspaces/rpg-game-final-project/leveling.hpp \
  /workspaces/rpg-game-final-project/ui.hpp

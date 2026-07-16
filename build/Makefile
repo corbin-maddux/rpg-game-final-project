@@ -329,6 +329,30 @@ level_zero.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/level_zero.cpp.s
 .PHONY : level_zero.cpp.s
 
+leveling.o: leveling.cpp.o
+.PHONY : leveling.o
+
+# target to build an object file
+leveling.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/leveling.cpp.o
+.PHONY : leveling.cpp.o
+
+leveling.i: leveling.cpp.i
+.PHONY : leveling.i
+
+# target to preprocess a source file
+leveling.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/leveling.cpp.i
+.PHONY : leveling.cpp.i
+
+leveling.s: leveling.cpp.s
+.PHONY : leveling.s
+
+# target to generate assembly for a file
+leveling.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/leveling.cpp.s
+.PHONY : leveling.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -431,6 +455,9 @@ help:
 	@echo "... level_zero.o"
 	@echo "... level_zero.i"
 	@echo "... level_zero.s"
+	@echo "... leveling.o"
+	@echo "... leveling.i"
+	@echo "... leveling.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

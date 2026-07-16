@@ -125,10 +125,24 @@ CMakeFiles/game.dir/inventory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/inventory.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspaces/rpg-game-final-project/inventory.cpp -o CMakeFiles/game.dir/inventory.cpp.s
 
+CMakeFiles/game.dir/leveling.cpp.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/leveling.cpp.o: /workspaces/rpg-game-final-project/leveling.cpp
+CMakeFiles/game.dir/leveling.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/leveling.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/leveling.cpp.o -MF CMakeFiles/game.dir/leveling.cpp.o.d -o CMakeFiles/game.dir/leveling.cpp.o -c /workspaces/rpg-game-final-project/leveling.cpp
+
+CMakeFiles/game.dir/leveling.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/leveling.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspaces/rpg-game-final-project/leveling.cpp > CMakeFiles/game.dir/leveling.cpp.i
+
+CMakeFiles/game.dir/leveling.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/leveling.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspaces/rpg-game-final-project/leveling.cpp -o CMakeFiles/game.dir/leveling.cpp.s
+
 CMakeFiles/game.dir/merchant.cpp.o: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/merchant.cpp.o: /workspaces/rpg-game-final-project/merchant.cpp
 CMakeFiles/game.dir/merchant.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/merchant.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/game.dir/merchant.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/merchant.cpp.o -MF CMakeFiles/game.dir/merchant.cpp.o.d -o CMakeFiles/game.dir/merchant.cpp.o -c /workspaces/rpg-game-final-project/merchant.cpp
 
 CMakeFiles/game.dir/merchant.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/game.dir/merchant.cpp.s: cmake_force
 CMakeFiles/game.dir/level_zero.cpp.o: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/level_zero.cpp.o: /workspaces/rpg-game-final-project/level_zero.cpp
 CMakeFiles/game.dir/level_zero.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/game.dir/level_zero.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/game.dir/level_zero.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/level_zero.cpp.o -MF CMakeFiles/game.dir/level_zero.cpp.o.d -o CMakeFiles/game.dir/level_zero.cpp.o -c /workspaces/rpg-game-final-project/level_zero.cpp
 
 CMakeFiles/game.dir/level_zero.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/game.dir/level_zero.cpp.s: cmake_force
 CMakeFiles/game.dir/level_one.cpp.o: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/level_one.cpp.o: /workspaces/rpg-game-final-project/level_one.cpp
 CMakeFiles/game.dir/level_one.cpp.o: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/game.dir/level_one.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/game.dir/level_one.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/level_one.cpp.o -MF CMakeFiles/game.dir/level_one.cpp.o.d -o CMakeFiles/game.dir/level_one.cpp.o -c /workspaces/rpg-game-final-project/level_one.cpp
 
 CMakeFiles/game.dir/level_one.cpp.i: cmake_force
@@ -173,6 +187,7 @@ game_OBJECTS = \
 "CMakeFiles/game.dir/ui.cpp.o" \
 "CMakeFiles/game.dir/combat.cpp.o" \
 "CMakeFiles/game.dir/inventory.cpp.o" \
+"CMakeFiles/game.dir/leveling.cpp.o" \
 "CMakeFiles/game.dir/merchant.cpp.o" \
 "CMakeFiles/game.dir/level_zero.cpp.o" \
 "CMakeFiles/game.dir/level_one.cpp.o"
@@ -184,6 +199,7 @@ game: CMakeFiles/game.dir/main.cpp.o
 game: CMakeFiles/game.dir/ui.cpp.o
 game: CMakeFiles/game.dir/combat.cpp.o
 game: CMakeFiles/game.dir/inventory.cpp.o
+game: CMakeFiles/game.dir/leveling.cpp.o
 game: CMakeFiles/game.dir/merchant.cpp.o
 game: CMakeFiles/game.dir/level_zero.cpp.o
 game: CMakeFiles/game.dir/level_one.cpp.o
@@ -192,7 +208,7 @@ game: _deps/ftxui-build/libftxui-component.a
 game: _deps/ftxui-build/libftxui-dom.a
 game: _deps/ftxui-build/libftxui-screen.a
 game: CMakeFiles/game.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable game"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/workspaces/rpg-game-final-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable game"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/game.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

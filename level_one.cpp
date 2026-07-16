@@ -2,6 +2,7 @@
 
 #include "combat.hpp"
 #include "merchant.hpp"
+#include "leveling.hpp"
 #include "ui.hpp"
 
 bool levelOne(Player& player) {
@@ -17,7 +18,7 @@ bool levelOne(Player& player) {
     if (player.returnToMainMenu) return false;
 
     Enemy bat = {
-        "Hollow Bat", 65, 14, 7, 4, 45, 1.0, 1.0
+        "Hollow Bat", 65, 14, 7, 4, 45, 1.0, 1.0, 75
     };
 
     int result = fightEnemy(player, bat);
@@ -77,7 +78,7 @@ bool levelOne(Player& player) {
     if (player.returnToMainMenu) return false;
 
     Enemy guard = {
-        "Stone Guard", 135, 18, 16, 8, 60, 2.0, 0.5
+        "Stone Guard", 135, 18, 16, 8, 60, 2.0, 0.5, 100
     };
 
     result = fightEnemy(player, guard);
@@ -85,6 +86,22 @@ bool levelOne(Player& player) {
     if (result != 1) {
         return false;
     }
+
+    int levelsGained = processLevelUps(player);
+
+    if (levelsGained > 0) {
+        showMessage(
+            "LEVEL UP",
+            {
+                "You reached Level " + std::to_string(player.level) + "!",
+                "Your combat stats increased and your Health was restored.",
+                "EXP remaining: " + std::to_string(player.experience) +
+                    "/" + std::to_string(player.levelUpRequirement)
+            }
+        );
+    }
+
+    if (player.returnToMainMenu) return false;
 
     showMessage(
         "LEVEL 1 COMPLETE",

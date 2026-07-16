@@ -22,6 +22,12 @@ struct Player {
     int defense = 5;
     int coins = 0;
 
+    int level = 1;
+    int experience = 0;
+    int levelUpRequirement = 100;
+    int levelUpModifier = 0;
+    bool levelTutorialShown = false;
+
     std::string weaponName = "Fists";
     int weaponDamageBonus = -5;
     int weaponSpeedBonus = 0;
@@ -43,4 +49,5 @@ struct Enemy {
     int coinDrop;
     double meleeMultiplier = 1.0;
     double magicMultiplier = 1.0;
+    int experienceDrop = 0;
 };

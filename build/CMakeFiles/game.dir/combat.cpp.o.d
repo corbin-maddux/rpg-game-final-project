@@ -120,4 +120,5 @@ CMakeFiles/game.dir/combat.cpp.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /workspaces/rpg-game-final-project/ui.hpp
+ /workspaces/rpg-game-final-project/ui.hpp \
+ /workspaces/rpg-game-final-project/leveling.hpp

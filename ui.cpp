@@ -69,6 +69,11 @@ Element drawInventory() {
             "/" + std::to_string(uiPlayer->maxMana)
         ));
         rows.push_back(text("Coins: " + std::to_string(uiPlayer->coins)));
+        rows.push_back(text("Level: " + std::to_string(uiPlayer->level)) | bold);
+        rows.push_back(text(
+            "EXP: " + std::to_string(uiPlayer->experience) +
+            "/" + std::to_string(uiPlayer->levelUpRequirement)
+        ));
 
         if (!uiPlayer->inventoryMessage.empty()) {
             rows.push_back(separator());

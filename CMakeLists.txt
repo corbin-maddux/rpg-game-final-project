@@ -20,6 +20,7 @@ add_executable(game
     ui.cpp
     combat.cpp
     inventory.cpp
+    leveling.cpp
     merchant.cpp
     level_zero.cpp
     level_one.cpp

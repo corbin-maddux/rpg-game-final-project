@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/game.dir/level_one.cpp.o.d"
   "CMakeFiles/game.dir/level_zero.cpp.o"
   "CMakeFiles/game.dir/level_zero.cpp.o.d"
+  "CMakeFiles/game.dir/leveling.cpp.o"
+  "CMakeFiles/game.dir/leveling.cpp.o.d"
   "CMakeFiles/game.dir/main.cpp.o"
   "CMakeFiles/game.dir/main.cpp.o.d"
   "CMakeFiles/game.dir/merchant.cpp.o"

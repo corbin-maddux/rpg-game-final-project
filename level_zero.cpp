@@ -3,6 +3,7 @@
 #include "combat.hpp"
 #include "inventory.hpp"
 #include "merchant.hpp"
+#include "leveling.hpp"
 #include "ui.hpp"
 
 bool levelZero(Player& player) {
@@ -32,7 +33,7 @@ bool levelZero(Player& player) {
     if (player.returnToMainMenu) return false;
 
     Enemy rat = {
-        "Dungeon Rat", 30, 10, 7, 2, 5, 1.0, 1.0
+        "Dungeon Rat", 30, 10, 7, 2, 5, 1.0, 1.0, 40
     };
 
     int result = fightEnemy(player, rat);
@@ -54,7 +55,7 @@ bool levelZero(Player& player) {
     if (player.returnToMainMenu) return false;
 
     Enemy slime = {
-        "Cave Slime", 50, 20, 6, 5, 10, 0.5, 2.5
+        "Cave Slime", 50, 20, 6, 5, 10, 0.5, 2.5, 60
     };
 
     result = fightEnemy(player, slime);
@@ -69,6 +70,14 @@ bool levelZero(Player& player) {
         {"The slime dropped a Healing Potion."},
         "Meet Merrick"
     );
+
+    if (player.returnToMainMenu) return false;
+
+    int levelsGained = processLevelUps(player);
+
+    if (levelsGained > 0) {
+        showFirstLevelUpTutorial(player);
+    }
 
     if (player.returnToMainMenu) return false;
 

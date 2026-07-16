@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "ui.hpp"
+#include "leveling.hpp"
 
 int enemyTurn(Player& player, Enemy& enemy) {
     int damage = enemy.damage - player.defense;
@@ -154,13 +155,16 @@ int fightEnemy(Player& player, Enemy enemy) {
     }
 
     player.coins += enemy.coinDrop;
+    grantExperience(player, enemy.experienceDrop);
     player.inCombat = false;
     showMessage(
         "VICTORY",
         {
             "You defeated " + enemy.name + "!",
             "Coins found: " + std::to_string(enemy.coinDrop),
-            "Total coins: " + std::to_string(player.coins)
+            "EXP earned: " + std::to_string(enemy.experienceDrop),
+            "Total coins: " + std::to_string(player.coins),
+            "Total EXP: " + std::to_string(player.experience)
         }
     );
     return 1;
