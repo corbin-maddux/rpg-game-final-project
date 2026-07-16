@@ -147,7 +147,6 @@ CMakeFiles/game.dir/combat.cpp.o: /workspaces/rpg-game-final-project/combat.cpp 
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
   /workspaces/rpg-game-final-project/combat.hpp \
   /workspaces/rpg-game-final-project/game.hpp \
-  /workspaces/rpg-game-final-project/inventory.hpp \
   /workspaces/rpg-game-final-project/ui.hpp
 
 CMakeFiles/game.dir/inventory.cpp.o: /workspaces/rpg-game-final-project/inventory.cpp \
@@ -744,7 +743,6 @@ CMakeFiles/game.dir/main.cpp.o: /workspaces/rpg-game-final-project/main.cpp \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
   /workspaces/rpg-game-final-project/game.hpp \
-  /workspaces/rpg-game-final-project/inventory.hpp \
   /workspaces/rpg-game-final-project/levels.hpp \
   /workspaces/rpg-game-final-project/ui.hpp
 
