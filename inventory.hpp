@@ -1,3 +1,4 @@
+//to tell other files which functions and classes exist
 #pragma once
 
 #include "game.hpp"
