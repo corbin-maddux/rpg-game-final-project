@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+// structure for items
 struct Item {
     std::string name;
     std::string type;
@@ -12,6 +13,7 @@ struct Item {
 };
 
 struct Player {
+    //player's stats
     int health = 100;
     int maxHealth = 100;
     int mana = 50;
@@ -20,26 +22,34 @@ struct Player {
     int magicDamage = 10;
     int speed = 10;
     int defense = 5;
+    
+    // player's coins
     int coins = 0;
 
+    // variables for the leveling up system
     int level = 1;
     int experience = 0;
     int levelUpRequirement = 100;
     int levelUpModifier = 0;
     bool levelTutorialShown = false;
 
+    //variables for player's weapons
     std::string weaponName = "Fists";
     int weaponDamageBonus = -5;
     int weaponSpeedBonus = 0;
     bool pyroBookEquipped = false;
+
+    //variables to check if the player's in combat or returning to the main menu
     bool inCombat = false;
     bool returnToMainMenu = false;
+
+    // variables for inventory
     int selectedItem = 0;
     std::string inventoryMessage;
-
     std::vector<Item> inventory;
 };
 
+// function for enemy and enemy stats
 struct Enemy {
     std::string name;
     int health;
